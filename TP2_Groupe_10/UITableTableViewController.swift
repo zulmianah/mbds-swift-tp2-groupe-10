@@ -22,18 +22,18 @@ class UITableTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    var continents = getCountryPerContinent()
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return continents.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countries.count
+        return Array(continents)[section].value.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath)
-        
-        let country = countries[indexPath.row]
+        let country = Array(continents)[indexPath.section].value[indexPath.row]
         cell.textLabel?.text = country.name
         cell.detailTextLabel?.text = country.isoCode
         cell.imageView?.image = UIImage(named: country.isoCode)
@@ -41,7 +41,7 @@ class UITableTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(section)"
+        return "\(Array(continents)[section].key)"
     }
     
 

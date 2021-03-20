@@ -20,3 +20,16 @@ let countries = [
     Country(isoCode: "es", name: "Espagne", continent: "Europe"),
     Country(isoCode: "in", name: "Inde", continent: "Asie"),
 ]
+func getCountryPerContinent()->[String:[Country]]{
+    var continents:[String:[Country]]=[:]
+    
+    for country in countries {
+        if !continents.keys.contains(country.continent) {
+            continents[country.continent]=[country]
+        } else {
+            continents[country.continent]?.append(country)
+        }
+    }
+    
+    return continents
+}
